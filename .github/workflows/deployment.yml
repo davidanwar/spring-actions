@@ -9,7 +9,7 @@ jobs:
   builds:
     runs-on: ubuntu-latest
     environment:
-      name: ${{ github.ref }}
+      name: ${{ github.ref_name }}
     steps:
       - name: Get Branch
         run: echo "${{ github.ref }}"
