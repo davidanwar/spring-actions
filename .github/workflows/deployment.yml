@@ -14,4 +14,4 @@ jobs:
       - name: Get Branch
         run: echo "${{ github.ref }}"
       - name: Get Secret
-        run: echo "${{ secrets.DB_USERNAME }}
+        run: echo "${{ secrets.DB_USERNAME }}"
