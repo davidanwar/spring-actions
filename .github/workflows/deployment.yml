@@ -15,3 +15,5 @@ jobs:
         run: echo "${{ github.ref }}"
       - name: Get Secret
         run: echo "${{ secrets.DB_USERNAME }}"
+      - name: Get Environment Variable
+        run: echo "${{ env.DB_PORT }}"
