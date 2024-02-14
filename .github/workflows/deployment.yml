@@ -8,6 +8,10 @@ on:
 jobs:
   builds:
     runs-on: ubuntu-latest
+    environment:
+      name: ${{ github.ref }}
     steps:
-      - name: test
+      - name: Get Branch
         run: echo "${{ github.ref }}"
+      - name: Get Secret
+        run: echo "${{ secrets.DB_USERNAME }}
