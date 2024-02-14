@@ -9,7 +9,7 @@ jobs:
   builds:
     runs-on: ubuntu-latest
     environment:
-      name: master
+      name: ${{ github.ref_name }}
     env:
       DB_USERNAME: ${{ secrets.DB_USERNAME }}
       DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
@@ -17,12 +17,8 @@ jobs:
       DB_PORT: ${{ secrets.DB_PORT }}
 
     steps:
-      - name: Get Branch Base
-        run: echo "BRANCH ${{ github.base_ref }}"
-      - name: Get Branch Ref
-        run: echo "BRANCH ${{ github.ref }}"
-      - name: Get Branch Name
-        run: echo "BRANCH ${{ github.ref_name }}"
+      - name: Get Branch
+        run: echo "Branch ${{ github.ref_name }}"
       - uses: actions/checkout@v4
       - name: Set up JDK 17
         uses: actions/setup-java@v4
