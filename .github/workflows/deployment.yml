@@ -1,0 +1,12 @@
+name: Deployment
+on: 
+  push:
+    branches:
+      - master
+      - development
+jobs:
+  builds:
+    runs-on: ubuntu-latest
+    steps:
+      - name: test
+        run: echo "${{ github.ref }}"
