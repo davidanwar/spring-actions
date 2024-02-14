@@ -8,8 +8,8 @@ on:
 jobs:
   builds:
     runs-on: ubuntu-latest
-#    environment:
-#      name: ${{ github.ref_name }}
+    environment:
+      name: master
     steps:
       - name: Get Branch
         run: echo "${{ github.ref }}"
