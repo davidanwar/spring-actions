@@ -70,4 +70,5 @@ jobs:
           script: |
             echo $(sudo docker images)
             sudo docker pull 041271/spring-actions:latest
+            sudo docker run -d --name spring-actions -p 8080:8080 041271/spring-actions:latest
             echo $(sudo docker images)
