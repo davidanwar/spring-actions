@@ -67,4 +67,7 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_KEY }}
           port: ${{ secrets.SERVER_PORT }}
-          script: whoami
+          script: |
+            echo $(sudo docker images)
+            sudo docker pull 041271/spring-actions:latest
+            echo $(sudo docker images)
