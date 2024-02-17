@@ -7,7 +7,7 @@ on:
       - development
 jobs:
   builds:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     environment:
       name: ${{ github.ref_name }}
     env:
@@ -20,11 +20,13 @@ jobs:
       - name: Get Branch
         run: echo "Branch ${{ github.ref_name }}"
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
-          java-version: '17'
-          distribution: 'temurin'
+          java-version: "17"
+          distribution: "temurin"
           cache: maven
 
       - name: Grant execute permission for gradlew
@@ -33,4 +35,22 @@ jobs:
         run: mvn -B compile --file pom.xml
       - name: Build with Maven
         run: mvn -B package --file pom.xml
-
+  docker:
+    needs: builds
+    runs-on: ubuntu-22.04
+    environment:
+      name: ${{ github.ref_name }}
+    steps:
+      - name: Checkout Branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+      - name: Build and Push Docker
+        uses: mr-smithers-excellent/docker-build-push@v6
+        with:
+          image: 041271/spring-actions
+          tags: v1, latest
+          registry: docker.io
+          dockerfile: Dockerfile
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
